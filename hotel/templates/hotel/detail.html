@@ -1,0 +1,67 @@
+{% extends 'base.html' %} 
+{% load bootstrap4 %}
+{% block body %}
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="/">Inicio</a><span><a href="{% url 'habitaciones:habitaciones_list' %}">Habitaciones</a></span>
+              </div>
+              <h1>{{ habitacion_detail }}</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url(img/slider_1.jpg);"></li>
+      <li style="background-image: url(img/slider_4.jpg);"></li>
+      <li style="background-image: url(img/slider_2.jpg);"></li>
+    </ul>
+  </section>
+
+  <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p><img src="{{ habitacion_detail.image.url }}" class="img-responsive" alt="Free Bootstrap Template by uicookies.com"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Detalles</h2>
+          <p>Numero de habitacion: {{ habitacion_detail.num_habitacion }}</p>
+          <p>Baños: {{ habitacion_detail.baños }}</p>
+          <p>Garaje: {{ habitacion_detail.garaje }}</p>
+          <p>Camas: {{ habitacion_detail.camas }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if request.user.is_authenticated %}
+    <section class="probootstrap-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Reserve this Property</h2>
+              <form action ="" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form reserva_form %}
+                {% buttons %}
+                  <button type="submit" class="btn btn-primary">Reserve</button>
+                {% endbuttons %}
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+{% endblock body %}

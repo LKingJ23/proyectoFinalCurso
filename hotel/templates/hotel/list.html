@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block body %}
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="/">Inicio</a><span>Habitaciones</span>
+              </div>
+              <h1>Habitaciones</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url(img/slider_1.jpg);"></li>
+      <li style="background-image: url(img/slider_4.jpg);"></li>
+      <li style="background-image: url(img/slider_2.jpg);"></li>
+    </ul>
+  </section>
+  <!-- END: slider  -->
+
+  <section class="probootstrap-section probootstrap-section-lighter">
+    <div class="container">
+      <div class="row">
+        {% if habitaciones_list %}
+          {% for habitaciones in habitaciones_list %}
+            {% for hotel in hotel %}
+              <div class="col-md-4 col-sm-6">
+                <div class="probootstrap-card probootstrap-listing">
+                  <div class="probootstrap-card-media">
+                    <img src="{{ habitaciones.image.url }}" class="img-responsive" alt="Free HTML5 Template by uicookies.com">
+                  </div>
+                  <div class="probootstrap-card-text">
+                    <h2 class="probootstrap-card-heading"><a href="{% url 'habitaciones:habitacion_detail' habitaciones.id %}">{{ habitaciones }}</a></h2>
+                    <div class="probootstrap-listing-location">
+                      <i class="icon-location2"></i> <span>{{ hotel.ubicacion }}</span>
+                    </div>
+                    <div class="probootstrap-listing-price"><strong></strong></div>
+                  </div>
+                  <div class="probootstrap-card-extra">
+                    <ul>
+                      <li>
+                        Habitación
+                        <span>{{ habitaciones.num_habitacion }}</span>
+                      </li>
+                      <li>
+                        Baños
+                        <span>{{ habitaciones.baños }}</span>
+                      </li>
+                      <li>
+                        Garaje
+                        <span>{{ habitaciones.garaje }}</span>
+                      </li>
+                      <li>
+                        Camas
+                        <span>{{ habitaciones.camas }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        {% else %}
+            <div class="col-md-10 col-sm-10">
+              <h2>No properties with this name or type</h2>
+            </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+{% endblock body %}
