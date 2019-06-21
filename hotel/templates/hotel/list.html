@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
   <section class="probootstrap-slider flexslider2 page-inner">
     <div class="overlay"></div>
@@ -19,9 +20,9 @@
       </div>
     </div>
     <ul class="slides">
-      <li style="background-image: url(img/slider_1.jpg);"></li>
-      <li style="background-image: url(img/slider_4.jpg);"></li>
-      <li style="background-image: url(img/slider_2.jpg);"></li>
+      <li style="background-image: url({% static 'img/hotel-soelden-hallenbad-slider.jpg' %});" class="overlay"></li>
+      <li style="background-image: url({% static 'img/slider-home-2.jpg' %});" class="overlay"></li>
+      <li style="background-image: url({% static 'img/slider-page-ritz-plaza-hotel-leblon-acomodacoes.jpg' %});" class="overlay"></li>
     </ul>
   </section>
   <!-- END: slider  -->
@@ -70,7 +71,7 @@
           {% endfor %}
         {% else %}
             <div class="col-md-10 col-sm-10">
-              <h2>No properties with this name or type</h2>
+              <h2>No hay habitaciones con esa palabra introducida</h2>
             </div>
 
         {% endif %}

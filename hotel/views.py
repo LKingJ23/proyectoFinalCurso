@@ -12,6 +12,7 @@ from django.urls import reverse
 def habitaciones_list(request):
 	habitaciones_list = Habitaciones.objects.all()
 	print(habitaciones_list)
+
 	template = 'hotel/list.html'
 	hotel = Hotel.objects.all()
 	hotel_list = Hotel.objects.all()
@@ -20,9 +21,8 @@ def habitaciones_list(request):
 
 	if address_query:
 		print(address_query)
-		print(property_type)
-		habitaciones_list = Habitaciones.filter(
-			Q(name__icontains = address_query)
+		habitaciones_list = habitaciones_list.filter(
+			Q(descripcion__icontains = address_query)
 		).distinct()		
 
 	print(habitaciones_list)
