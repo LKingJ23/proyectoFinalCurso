@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'hotel',
     'home',
     'bootstrap4',
+    'login',
 ]
 
 MIDDLEWARE = [

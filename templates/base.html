@@ -41,9 +41,9 @@
             <li><a href="contact.html">Contacto</a></li>
             {% if request.user.is_authenticated %}
               <li>Bienvenido {{ user }}</li>
-              <li><a href="">Cerrar sesión</a></li>
+              <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
             {% else %}
-              <li><a href="contact.html">Iniciar sesión</a></li>
+              <li><a href="{% url 'login:user_login' %}">Iniciar sesión</a></li>
             {% endif %}
           </ul>
           <div class="extra-text visible-xs"> 

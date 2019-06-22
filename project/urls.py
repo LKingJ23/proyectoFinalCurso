@@ -19,11 +19,15 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from home import views
+from login import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls', namespace='home')),
     path('habitaciones/', include('hotel.urls', namespace='habitaciones')),
+    url(r'^login/',include('login.urls')),
+    url(r'^logout/$', views.user_logout, name='logout'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
