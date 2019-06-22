@@ -28,6 +28,7 @@ urlpatterns = [
     path('habitaciones/', include('hotel.urls', namespace='habitaciones')),
     url(r'^login/',include('login.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^register/$',views.register,name='register'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

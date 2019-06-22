@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-  <section class="probootstrap-section probootstrap-section-lighter">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-	<div class="container">
-    	<div class="jumbotron">
-      		<h1>Inicie sesión :</h1>
-			<form method="post" action="{% url 'login:user_login' %}">
-          		{% csrf_token %}
-          		{# A more "HTML" way of creating the login form#}
-          		<label for="Nombre">Nombre:</label>
-          		<input type="text" name="username" placeholder="Nombre">
-				<label for="Contraseña">Contraseña:</label>
-          		<input type="password" name="password" placeholder="Contraseña">
-				<input type="submit" name="" value="Login">
-			</form>
-		</div>
-  	</div>
+<section class="probootstrap-section probootstrap-section-lighter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="container">
+          <div class="jumbotron">
+            <h1>Inicie sesión :</h1>
+            <form method="post" action="{% url 'login:user_login' %}">
+              {% csrf_token %}
+              <label for="Nombre">Nombre:</label>
+              <input type="text" name="username" placeholder="Nombre">
+              <label for="Contraseña">Contraseña:</label>
+              <input type="password" name="password" placeholder="Contraseña">
+              <input type="submit" name="" value="Login">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </section>
 {% endblock %}
