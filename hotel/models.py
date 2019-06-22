@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -46,6 +47,7 @@ class Habitaciones(models.Model):
 	baños = models.IntegerField(default=0)
 	garaje = models.IntegerField(default=0)
 	camas = models.IntegerField(default=0)
+	precio = models.IntegerField(default=0)
 	habitacion_hotel = models.ForeignKey('Hotel', on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -69,4 +71,38 @@ class Tipo_alojamiento(models.Model):
 
 class Reserva(models.Model):
 	reserva = models.ForeignKey(User, on_delete=models.CASCADE)
-	fecha_reserva = models.DateField()
+	fecha_reserva = models.DateField(default=datetime.date.today)
+
+	def __str__(self):
+		return str(self.fecha_reserva)
+
+	class Meta:
+		verbose_name = 'Reserva'
+		verbose_name_plural = 'Reservas'
+
+class Valoraciones(models.Model):
+	fecha = models.DateField()
+	valoracion = models.IntegerField(default=0)
+	valoracion_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+	valoracion_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.valoracion_usuario
+
+	class Meta:
+		verbose_name = 'Valoración'
+		verbose_name_plural = 'Valoraciones'
+
+class Reservas_habitacion(models.Model):
+	fecha_entrada = models.DateField()
+	fecha_salida = models.DateField()
+	ocupantes = models.IntegerField(default=0)
+	reserva_habitacion = models.ForeignKey('Habitaciones', on_delete=models.CASCADE)
+	reserva_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE)
+
+	def __str__(self):
+		return str(self.fecha_entrada)
+
+	class Meta:
+		verbose_name = 'Reserva habitacion'
+		verbose_name_plural = 'Reservas habitaciones'

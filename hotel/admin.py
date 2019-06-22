@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Hotel, Habitaciones, Tipo_pension, Precio_pension, Tipo_alojamiento, Reserva
+from .models import Hotel, Habitaciones, Tipo_pension, Precio_pension, Tipo_alojamiento, Reserva, Valoraciones, Reservas_habitacion
 from django.contrib.auth.models import User
 # Register your models here.
 
@@ -8,6 +8,8 @@ admin.site.register(Habitaciones)
 admin.site.register(Tipo_pension)
 admin.site.register(Tipo_alojamiento)
 admin.site.register(Reserva)
+admin.site.register(Valoraciones)
+admin.site.register(Reservas_habitacion)
 
 class PrecioAdmin(admin.ModelAdmin):
 	list_display = ['precio', 'precio_tipo_pension', 'hotel_tipo_pension']
