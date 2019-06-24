@@ -107,61 +107,12 @@
 
   <section class="probootstrap-section probootstrap-bg" style="background-image: url({% static 'img/slider_2.jpg' %});">
     <div class="container text-center probootstrap-animate" data-animate-effect="fadeIn">
-      <h2 class="heading">Best Home &amp; Properties</h2>
-      <p class="sub-heading">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-      <p><a href="#" class="btn btn-primary mb10">Find out more</a></p>
+      <h2 class="heading">Los mejores hoteles &amp; habitaciones</h2>
+      <p><a href="{% url 'habitaciones:habitaciones_list' %}" class="btn btn-primary mb10">Saber mas</a></p>
     </div>
   </section>
   <!-- END: section -->
-<!--
-  <section class="probootstrap-section probootstrap-section-lighter">
-    <div class="container">
-      <div class="row heading">
-        <h2 class="mt0 mb50 text-center">Featured Listing</h2>
-      </div>
-      <div class="row">
-        {% for property in property_list_home %}
-          <div class="col-md-4 col-sm-6">
-            <div class="probootstrap-card probootstrap-listing">
-              <div class="probootstrap-card-media">
-                <img src="{{ property.image.url }}" class="img-responsive" alt="Free HTML5 Template by uicookies.com">
-              </div>
-              <div class="probootstrap-card-text">
-                <h2 class="probootstrap-card-heading"><a href="#">{{ property }}</a></h2>
-                <div class="probootstrap-listing-location">
-                  <i class="icon-location2"></i> <span>360 W Wellington Chicago, IL 60657</span>
-                </div>
-                <div class="probootstrap-listing-category for-sale"><span>for {{ property.property_type }}</span></div>
-                <div class="probootstrap-listing-price"><strong>{{ property.price }}</strong> / month</div>
-              </div>
-              <div class="probootstrap-card-extra">
-                <ul>
-                  <li>
-                    Area
-                    <span>{{ property.area }} m2</span>
-                  </li>
-                  <li>
-                    Beds
-                    <span>{{ property.beds_number }}</span>
-                  </li>
-                  <li>
-                    Baths
-                    <span>{{ property.baths_number}}</span>
-                  </li>
-                  <li>
-                    Garages
-                    <span>{{ property.garages_number}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
--->
   <section class="probootstrap-section">
     <div class="container">
       <div class="row heading">

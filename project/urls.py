@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls', namespace='home')),
     path('habitaciones/', include('hotel.urls', namespace='habitaciones')),
+    path('contacto/', include('contacto.urls', namespace='contacto')),
     url(r'^login/',include('login.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^register/$',views.register,name='register'),
