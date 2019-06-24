@@ -11,10 +11,10 @@ from django.shortcuts import redirect
 
 
 def home(request):
+	#Vista que carga la página principal
 	habitaciones_list = Habitaciones.objects.annotate(habitaciones_count=Count('num_habitacion')).values('num_habitacion', 'habitaciones_count', 'image')
 	hotel = Hotel.objects.all()
 	habitaciones_count = Habitaciones.objects.count()
-	print(habitaciones_list)
 	template = 'home/home.html'
 	context = {
 		'hotel': hotel,

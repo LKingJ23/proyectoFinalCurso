@@ -13,15 +13,20 @@ import smtplib, ssl
 
 
 def habitaciones_list(request):
+	#Función para ver todas las habitaciones
 	habitaciones_list = Habitaciones.objects.all()
 	reservas_habitaciones = Reservas_habitacion.objects.all()
 
 	template = 'hotel/list.html'
 	hotel = Hotel.objects.all()
+	#Esta variable tiene el mismo valor que la anterior pero la he creado
+	#para que cuando se cargue esta vista la pestaña de habitaciones se "ilumine"
+	#en el menu de inicio
 	hotel_list = Hotel.objects.all()
 
 	address_query = request.GET.get('q')
 
+	#En esta parte hacemos la consulta del buscador
 	if address_query:
 		habitaciones_list = habitaciones_list.filter(
 			Q(descripcion__icontains = address_query)
@@ -34,21 +39,25 @@ def habitaciones_list(request):
 		'reservas_habitaciones': reservas_habitaciones
 	}
 
-	#import pdb; pdb.set_trace()
-
 	return render(request, template, context)
 
 def habitacion_detail(request, id):
+	#Función para ver en datalle la habitación seleccionada
+	#Creamos las variables que recogen todas las habitaciones en base de datos, reservas,
+	# y reservas de habitaciones
 	habitacion_detail = Habitaciones.objects.get(num_habitacion=id)
 	reserva = Reserva.objects.all()
 	reservas_habitacion = Reservas_habitacion.objects.all()
+	#Creamos la variable que hará que cargue dicho html
 	template = 'hotel/detail.html'
-	
+
+	#Si la habitacion ya esta reservada aparecerá el siguiente html.	
 	for reserva in reservas_habitacion:
 		if habitacion_detail == reserva.reserva_habitacion:
 			template = 'hotel/detail2.html'
 
 	if request.method == 'POST':
+		#Aquí recogemos los campos del formulario de la reserva de habitacion y lo tratamos
 		precio = 0
 		fecha_entrada = request.POST['fecha_entrada']
 		fecha_entrada = datetime.datetime.strptime(fecha_entrada, '%Y-%m-%d')
@@ -74,11 +83,7 @@ def habitacion_detail(request, id):
 			precio = precio_pension + 200
 		elif tipo_alojamiento.descripcion == 'individual':
 			precio = precio_pension + 100
-		import pdb; pdb.set_trace()
 		precio = precio * float(request.POST['mayor'])
-		print(precio_pension)
-		print(tipo_alojamiento)
-		print(precio)
 		user = request.user
 		if fecha_entrada > fecha_salida:
 			context = {
@@ -92,6 +97,7 @@ def habitacion_detail(request, id):
 				'reservas_habitacion': reservas_habitacion,
 			}
 			reserva_reserva = Reserva(reserva=user, fecha_reserva=reserva)
+			#Guardamos la reserva en la base de datos
 			reserva_reserva.save()
 			reserva_reserva = Reserva.objects.latest('fecha_reserva')
 			reserva_habitacion = Reservas_habitacion(
@@ -127,6 +133,7 @@ def habitacion_detail(request, id):
 			with smtplib.SMTP_SSL(smtp_server, port, context = context) as server:
 				server.login(sender, password)
 				server.sendmail(sender, reciever, message)
+			#Guardamos la reserva de habitación en la base de datos
 			reserva_habitacion.save()
 			return redirect('/')
 

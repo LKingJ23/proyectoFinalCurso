@@ -3,6 +3,7 @@ import smtplib, ssl
 from django.shortcuts import redirect
 
 def contacto(request):
+	#Vista que carga el formulario de contacto y lo envia
 	template = 'contacto/contacto.html'
 
 	if request.method == 'POST':
@@ -16,7 +17,7 @@ def contacto(request):
 		sender = 'gestion.mhhoteles@gmail.com'
 		password = 'Mhhoteles.1'
 
-		reciever = 'LKingJ23@gmail.com'
+		reciever = 'gestion.mhhoteles@gmail.com'
 		message = """\
 			Gestion de MH Hoteles 
 

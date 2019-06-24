@@ -22,12 +22,14 @@ def user_logout(request):
     return redirect('/')
 
 def register(request):
+    #Vista que carga la página de registro
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
+            #Guarda el usuario y manda un email al usuario dando la bienvenida
             user.save()
             smtp_server = 'smtp.gmail.com'
             port = 465
@@ -57,6 +59,7 @@ def register(request):
                            'registered':registered})
 
 def user_login(request):
+    #Vista que carga el login
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
