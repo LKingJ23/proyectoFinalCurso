@@ -49,6 +49,7 @@ def habitacion_detail(request, id):
 			template = 'hotel/detail2.html'
 
 	if request.method == 'POST':
+		precio = 0
 		fecha_entrada = request.POST['fecha_entrada']
 		fecha_entrada = datetime.datetime.strptime(fecha_entrada, '%Y-%m-%d')
 		fecha_entrada = fecha_entrada.date()
@@ -58,6 +59,26 @@ def habitacion_detail(request, id):
 		ocupantes = request.POST['ocupantes']
 		habitacion = habitacion_detail
 		reserva = datetime.date.today()
+		tipo_pension = request.POST['pension']
+		precio_pension = 0
+		if tipo_pension == 'completa':
+			precio_pension = 150.00
+		elif tipo_pension == 'media':
+			precio_pension = 100.00
+		elif tipo_pension == 'desayuno':
+			precio_pension = 60.00
+		elif tipo_pension == 'nada':
+			precio_pension = 0.00
+		tipo_alojamiento = Tipo_alojamiento.objects.get(habitacion_tipo_alojamiento=habitacion_detail)
+		if tipo_alojamiento.descripcion == 'doble':
+			precio = precio_pension + 200
+		elif tipo_alojamiento.descripcion == 'individual':
+			precio = precio_pension + 100
+		import pdb; pdb.set_trace()
+		precio = precio * float(request.POST['mayor'])
+		print(precio_pension)
+		print(tipo_alojamiento)
+		print(precio)
 		user = request.user
 		if fecha_entrada > fecha_salida:
 			context = {
@@ -96,6 +117,7 @@ def habitacion_detail(request, id):
 				Ocupantes: """ + str(ocupantes) + """
 				Descripcion de la habitacion: """ + str(habitacion) + """
 				Fecha de la reserva: """ + str(reserva_reserva) + """
+				Precio: """ + str(precio) + """
 
 				Encantados de poder contar contigo.
 				"""

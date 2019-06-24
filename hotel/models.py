@@ -11,6 +11,23 @@ precio_pension = (
 	(0.00, 0.00)
 )
 
+pension = (
+	('completa', 'completa'),
+	('media', 'media'),
+	('desayuno', 'desayuno'),
+	('nada', 'nada')
+)
+
+tipo_alojamiento = (
+	('doble', 'doble'),
+	('individual', 'individual')
+)
+
+precio_alojamiento = (
+	(200, 200),
+	(100, 100)
+)
+
 class Hotel(models.Model):
 	nombre = models.CharField(max_length=50)
 	ubicacion = models.CharField(max_length=50)
@@ -26,7 +43,7 @@ class Hotel(models.Model):
 		verbose_name_plural = 'Hoteles'
 
 class Tipo_pension(models.Model):
-	tipo_pension = models.CharField(max_length=50)
+	tipo_pension = models.CharField(choices=pension, max_length=50)
 
 	def __str__(self):
 		return self.tipo_pension
@@ -41,7 +58,7 @@ class Precio_pension(models.Model):
 	hotel_tipo_pension = models.ForeignKey('Hotel', on_delete=models.CASCADE)
 
 	def __str__(self):
-		return str(self.precio)
+		return str(self.precio_tipo_pension)
 
 	class Meta:
 		verbose_name = 'Precio Pension'
@@ -54,7 +71,6 @@ class Habitaciones(models.Model):
 	baños = models.IntegerField(default=0)
 	garaje = models.IntegerField(default=0)
 	camas = models.IntegerField(default=0)
-	precio = models.IntegerField(default=0)
 	habitacion_hotel = models.ForeignKey('Hotel', on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -65,8 +81,8 @@ class Habitaciones(models.Model):
 		verbose_name_plural = 'Habitaciones'
 
 class Tipo_alojamiento(models.Model):
-	descripcion = models.CharField(max_length=50)
-	precio = models.DecimalField(max_digits=5, decimal_places=2)
+	descripcion = models.CharField(choices=tipo_alojamiento, max_length=50)
+	precio = models.DecimalField(choices=precio_alojamiento, max_digits=5, decimal_places=2)
 	habitacion_tipo_alojamiento = models.ForeignKey('Habitaciones', on_delete=models.CASCADE)
 
 	def __str__(self):
