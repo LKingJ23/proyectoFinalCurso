@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load bootstrap4 %}
+{% block body %}
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="/">Inicio</a><span><a href="{% url 'habitaciones:habitaciones_list' %}">Habitaciones</a></span>
+              </div>
+              <h1>{{ habitacion_detail }}</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url({% static 'img/hotel-soelden-hallenbad-slider.jpg' %});" class="overlay"></li>
+      <li style="background-image: url({% static 'img/slider-home-2.jpg' %});" class="overlay"></li>
+      <li style="background-image: url({% static 'img/slider-page-ritz-plaza-hotel-leblon-acomodacoes.jpg' %});" class="overlay"></li>
+    </ul>
+  </section>
+  
+  <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Lo sentimos pero esta habitación ya esta reservada.</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock body %}

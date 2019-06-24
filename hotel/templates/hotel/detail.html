@@ -47,18 +47,104 @@
   </section>
 
   {% if request.user.is_authenticated %}
+    {% if reserva %}
+      <section class="probootstrap-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Reserve esta habitación</h2>
+                <form action ="" method="POST">
+                  {% csrf_token %}
+                  <p style="color: red">Debe introducir una fecha de entrada menor a la de salida</p>
+                  <div class="row">
+                    <div class="col-md-3">
+                    Fecha entrada</br>
+                    <input type="date" name="fecha_entrada" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Fecha salida</br>
+                    <input type="date" name="fecha_salida" value=""></br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                    Ocupantes</br>
+                    <input type="number" name="ocupantes" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Niños menores de 3 años</br>
+                    <input type="number" name="menor3" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Niños menores entre 3 y 12 años</br>
+                    <input type="number" name="menor12" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Mayores de 12 años</br>
+                    <input type="number" name="mayor" value=""></br>
+                    </div>
+                  </div>
+
+                  {% buttons %}
+                    </br><button type="submit" class="btn btn-primary">Reserva</button>
+                  {% endbuttons %}
+                </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% else %}
+      <section class="probootstrap-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Reserve esta habitación</h2>
+                <form action ="" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-3">
+                    Fecha entrada</br>
+                    <input type="date" name="fecha_entrada" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Fecha salida</br>
+                    <input type="date" name="fecha_salida" value=""></br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                    Ocupantes</br>
+                    <input type="number" name="ocupantes" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Niños menores de 3 años</br>
+                    <input type="number" name="menor3" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Niños menores entre 3 y 12 años</br>
+                    <input type="number" name="menor12" value=""></br>
+                    </div>
+                    <div class="col-md-3">
+                    Mayores de 12 años</br>
+                    <input type="number" name="mayor" value=""></br>
+                    </div>
+                  </div>
+
+                  {% buttons %}
+                    </br><button type="submit" class="btn btn-primary">Reserva</button>
+                  {% endbuttons %}
+                </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% else %}
     <section class="probootstrap-section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2>Reserve this Property</h2>
-              <form action ="" method="POST">
-                {% csrf_token %}
-                {% bootstrap_form reserva_form %}
-                {% buttons %}
-                  <button type="submit" class="btn btn-primary">Reserve</button>
-                {% endbuttons %}
-              </form>
+            <p>Debe registrarse para poder hacer una reserva</p>
           </div>
         </div>
       </div>

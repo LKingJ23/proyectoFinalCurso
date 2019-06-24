@@ -4,6 +4,13 @@ import datetime
 
 # Create your models here.
 
+precio_pension = (
+	(150.00, 150.00),
+	(100.00, 100.00),
+	(60.00, 60.00),
+	(0.00, 0.00)
+)
+
 class Hotel(models.Model):
 	nombre = models.CharField(max_length=50)
 	ubicacion = models.CharField(max_length=50)
@@ -29,7 +36,7 @@ class Tipo_pension(models.Model):
 		verbose_name_plural = 'Tipo Pensiones'
 
 class Precio_pension(models.Model):
-	precio = models.DecimalField(max_digits=5, decimal_places=2)
+	precio = models.DecimalField(choices=precio_pension, max_digits=5, decimal_places=2)
 	precio_tipo_pension = models.ForeignKey('Tipo_pension', on_delete=models.CASCADE)
 	hotel_tipo_pension = models.ForeignKey('Hotel', on_delete=models.CASCADE)
 
@@ -101,7 +108,7 @@ class Reservas_habitacion(models.Model):
 	reserva_reserva = models.ForeignKey('Reserva', on_delete=models.CASCADE)
 
 	def __str__(self):
-		return str(self.fecha_entrada)
+		return str(self.reserva_habitacion)
 
 	class Meta:
 		verbose_name = 'Reserva habitacion'

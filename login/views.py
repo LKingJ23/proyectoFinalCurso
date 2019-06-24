@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from .forms import UserForm
+import smtplib, ssl
 
 
 def home(request):
@@ -28,6 +29,24 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            smtp_server = 'smtp.gmail.com'
+            port = 465
+
+            sender = 'gestion.mhhoteles@gmail.com'
+            password = 'Mhhoteles.1'
+
+            reciever = user.email
+            message = """\
+            Bienvenido a MH Hoteles """ + user.username + """
+
+            Encantados de poder contar contigo entre nuestros clientes.
+            """
+
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL(smtp_server, port, context = context) as server:
+                server.login(sender, password)
+                server.sendmail(sender, reciever, message)
             registered = True
         else:
             print(user_form.errors)
@@ -47,10 +66,10 @@ def user_login(request):
                 login(request,user)
                 return redirect('/')
             else:
-                return HttpResponse("Your account was inactive.")
+                return HttpResponse("Tu cuenta esta inactiva.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
+            print("Alguien intento iniciar sesión y falló.")
+            print("Nombre: {} y contraseña: {}".format(username,password))
+            return HttpResponse("Login incorrecto")
     else:
         return render(request, 'login/login.html', {})
