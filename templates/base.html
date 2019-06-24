@@ -36,9 +36,9 @@
             <li {% if habitaciones_count %} class="active"{% endif %}><a href="/">Inicio</a></li>
             <li {% if hotel_list %} class="active"{% endif %}>
             <a href="{% url 'habitaciones:habitaciones_list' %}">Habitaciones</a></li>
-            <li><a href="agents.html">Dueño</a></li>
-            <li><a href="about.html">Sobre nosotros</a></li>
-            <li><a href="contact.html">Contacto</a></li>
+            <li><a href="/">Dueño</a></li>
+            <li><a href="/">Valoraciones</a></li>
+            <li><a href="{% url 'contacto:contacto' %}">Contacto</a></li>
             {% if request.user.is_authenticated %}
               <li>Bienvenido {{ user }}</li>
               <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
@@ -83,7 +83,7 @@
               <li><a href="{% url 'habitaciones:habitaciones_list' %}">Habitaciones</a></li>
               <li><a href="#">Valoraciones</a></li>
               <li><a href="#">Chat online</a></li>
-              <li><a href="#">Contacto</a></li>
+              <li><a href="{% url 'contacto:contacto' %}">Contacto</a></li>
             </ul>
           </div>
         </div>
