@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<section class="probootstrap-section probootstrap-section-lighter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="container">
+          <div class="jumbotron">
+            {% if registered %}
+              <h1>Gracias por registrarse!</h1>
+            {% else %}
+              <h1>Darse de alta</h1>
+              <h3>Solo rellene el formulario</h3>
+              <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                <input type="submit" name="" value="Register">
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
